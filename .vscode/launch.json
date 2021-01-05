@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      // Test class configuration
+      {
+        "type": "scala",
+        "request": "launch",
+        // configuration name visible for the user
+        "name": "Test class",
+        // full name of the class to run
+        "testClass": "CubeCalculatorTest",
+        // optional build target name in case there more than one
+        // class with the same name
+        "buildTarget": "root-test"
+      }
+    ]
+  }
