@@ -15,13 +15,6 @@ USER root
 # Installing package into Spark if needed
 # spark-shell --master local --packages "<package name>"
 
-ARG USERNAME=spark
-ARG USER_UID=1000
-ARG USER_GID=$USER_UID
-
-# Create the user
-RUN groupadd --gid $USER_GID $USERNAME \
-    && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME 
 
 EXPOSE 8080
 

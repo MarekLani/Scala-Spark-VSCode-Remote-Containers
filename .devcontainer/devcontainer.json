@@ -10,7 +10,8 @@
 
 	// The 'service' property is the name of the service for the container that VS Code should
 	// use. Update this value and .devcontainer/docker-compose.yml to the real service name.
-	"service": "spark-master",
+	// Not needed as we are using dockerfile (one container)
+	//"service": "spark-master",
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
@@ -19,8 +20,7 @@
 
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
-		"scalameta.metals",
-		"scala-lang.scala"
+		"scalameta.metals"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
