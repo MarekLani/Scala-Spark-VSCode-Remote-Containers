@@ -8,7 +8,7 @@ class CubeCalculatorTest extends org.scalatest.funsuite.AnyFunSuite with DataFra
   val DEFAULT_MASTER = "local[*]"
 
   // get default conf
-  val defaultConf = new SparkConf()
+  val defaultConf = new SparkConf(true)
   
   test("CubeCalculator.cube") {
     assert(CubeCalculator.cube(3) === 27)
