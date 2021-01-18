@@ -16,7 +16,7 @@ Note: this approach can be utilized also in case you are using Databricks to hos
 
 2. **Create Dockerfile to define Dev Container**
 
-   As a first step you should create .devcontainer folder in the root folder of your Scala solution and create a Dockerfile in this folder. As we need Spark (and Java) to be installed in the dev container we are using [bitnami/spark:3.0.0](https://github.com/bitnami/bitnami-docker-spark) base image which already provides those. In the Docker file, we first set user to root, so that Remote - Container extension has rights to create folders for the solution inside the Docker container and we expose Spark Master console running on port 8080. Notice also commented out piece of Dockerfile which demonstrates how to install additional packages if needed.
+   As a first step you should create .devcontainer folder in the root folder of your Scala solution and create a Dockerfile in this folder. As we need Spark and Scala to be installed in the dev container we are using [bitnami/spark:3.0.0](https://github.com/bitnami/bitnami-docker-spark) base image which already provides those. In the Docker file, we first set user to root, so that Remote - Container extension has rights to create folders for the solution inside the Docker container and we expose Spark Master console running on port 8080. Notice also commented out piece of Dockerfile which demonstrates how to install additional packages if needed.
 
    Dockerfile:
 
@@ -49,11 +49,11 @@ Note: this approach can be utilized also in case you are using Databricks to hos
 
 ### Running Scala Spark job in Dev Container
 
-Now everything is setup to run Scala Spark Job inside dev container. As mentioned we have installed Scalameta.Metals extension which enables us to build and run scala code. Let's see how to use it on the sample code in this repository.
+Now everything is setup to run Scala Spark Job inside dev container. As mentioned we have installed Scalameta.Metals extension which enables us to build and run Scala code. Let's see how to use it on the sample code in this repository.
 
 In this repository you can find two Scala files. In the main folder there is [CubeCalculator.scala](src/main/scala/CubeCalculator.scala) file containing  logic to calculate volume of a cube and in the test folder there is [CubeCalculatorTest.scala](src/main/scala/CubeCalculator.scala) file with two simple tests we will run. One of them tests CubeCalculator logic and second one demonstrates how to connect to Spark Engine running in the container. It makes use of [MrPowers.spark-fast-tests](https://github.com/MrPowers/spark-fast-tests) Apache Spark test library for Scala, which for instance allows to do assertions on top of Data Frames. Solution folder also contains [build.sbt](build.sbt) file, which holds Scala build configuration which get's picked up by Metals extension.
 
-So that we can run the scala code first we need to run Import build using Metals extension:
+So that we can run the Scala code first we need to run Import build using Metals extension:
 
 ![Scala Metals Import Build](img/scalametalsbuild.png)
 
@@ -71,11 +71,11 @@ RUN \
 
 Then you just need to configure the metals extension to use the desired sbt script as documented in the provided link. This should be possible in devcontainer.json file. We haven't explored a way how to do it, as we didn't need to use custom sbt script. 
 
-After build is done, you should see that metals recognized your solution packages. Next you need to compile your files by running Cascade compile:
+After build is done, you should see that metals recognized your solution packages. Next you need to compile your files by running Cascade compile. If Cascade compile option does not invoke compilation, just expand the Projects packages or navigate to Scala files you want to compile .
 
 ![Metals compile](img/scalametalscompile.png)
 
-Once the solution is compiled you can navigate to your Scala files and you will see *run | debug* respectively *test | debug test* options on top of your object/class definitions. Now if you create breakpoint in your code and you will run debug, those breakpoints will be hit.
+Once the files are compiled you will see *run | debug* respectively *test | debug test* options on top of your object/class definitions. Now if you create breakpoint in your code and you will run debug, those breakpoints will be hit.
 
 ![metals debug](img/scalametaltest.png)
 
